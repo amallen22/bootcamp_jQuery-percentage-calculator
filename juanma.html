@@ -51,9 +51,6 @@
                         <input id="f2-result" type="text" size="7" readonly="readonly">
                         <span>%</span>
                     </div>
-                    <div class="col-md-12">
-                        <p id="helpBlock2" class="help-block">Something went wrong!!!</p>
-                    </div>
                 </fieldset>
             </form>
             <form id="f3" action="#" class="form-group">
@@ -70,88 +67,73 @@
                         <input id="f3-result" type="text" size="7" readonly="readonly">
                         <span>%</span>
                     </div>
-                    <div class="col-md-12">
-                        <p id="helpBlock3" class="help-block">Something went wrong!!!</p>
-                    </div>
                 </fieldset>
             </form>
             <p id="tips"><strong>Tips:</strong> Use tab to move to the next field. Use shift-tab to move to the previous field. Press enter to calculate.</p>
         </section>
     </div>
     <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script type="text/javascript">
-    var infoText = ""
-    var helpBox = '<div class="col-md-12"><p id="" class="help-block">' + infoText + '</p></div>'
+    <script>
+
+	var infoText = ""
+    var helpBox = '<div class="col-md-12"><p id="" class="help-block">' + infoText + '</p></div>' 
     var done = "DONE. It's maths!!"
     var wrong = "Please use only numbers"
 
-    $('#f1').removeClass("has-error");
-    $('.help-block').css("display","none");
-
-
-
     // Resolve first operation
-    $('button#f1-calculate').on('click', function() {
+    $('button#f1-calculate').on('click', function () {
         var percentValue = $('#f1-a').val()
         var value = $('#f1-b').val()
         var result = value * percentValue / 100
         $('#f1-result').val(result)
 
-        if (isNaN(result)) {
-        	$('#f1').addClass("has-error");
-        	$('.help-block').css("display","block");
-
-        	// $('form#f1').addClass("has-error");
-        	// $('form#f1 .help-block').addClass("text-succes").css("display","block");
-            // $('#helpBlock1').text(wrong).addClass("text-danger").removeClass("text-success").removeClass("help-block");
-        } else {
-        	$('#f1').removeClass("has-error");
-    		$('.help-block').css("display","none");
-        }
-        	//$('form#f1 .help-block').css("display","block").text(done).addClass("text-success").removeClass("help-block");
-//            $('#helpBlock1').text(done).addClass("text-success").removeClass("help-block").removeClass("text-danger");
+	    if (!isNaN(result)) {
+	        $('#helpBlock1').text(done).addClass("text-success").removeClass("help-block").removeClass("text-danger");
+	    } else {
+	        $('#helpBlock1').text(wrong).addClass("text-danger").removeClass("text-success").removeClass("help-block");
+	    }
     })
 
     // Resolve second operation
-    $('button#f2-calculate').on('click', function() {
+    $('button#f2-calculate').on('click', function () {
         var result2 = $('#f2-a').val()
         var value2 = $('#f2-b').val()
-        var percentValue2 = result2 / value2 * 100
+        var  percentValue2 = result2 * 100 / value2 
 
         $('#f2-result').val(percentValue2)
 
         if (!isNaN(percentValue2)) {
-            var infoText = done
-            $('.col-md-6:last-child').after(helpBox).addClass("text-success").removeClass("text-danger")
+    		var infoText = done
+        	$('.col-md-6:last-child').after(helpBox).addClass("text-success").removeClass("text-danger")
 
-            //$('#helpBlock1').text(done).addClass("text-success").removeClass("help-block").removeClass("text-danger")
-        } else {
-            // var infoText = wrong
-            //      $('.col-md-6').after(helpBox).addClass("text-danger").removeClass("text-success")
-
-            $('#helpBlock1').text(wrong).addClass("text-danger").removeClass("text-success").removeClass("help-block")
-        }
-    })
+	        //$('#helpBlock1').text(done).addClass("text-success").removeClass("help-block").removeClass("text-danger")
+	    } else {
+    		// var infoText = wrong
+      //   	$('.col-md-6').after(helpBox).addClass("text-danger").removeClass("text-success")
+	        
+	        $('#helpBlock1').text(wrong).addClass("text-danger").removeClass("text-success").removeClass("help-block")
+	    }
+    }) 
 
     // Resolve third operation
-    $('button#f3-calculate').on('click', function() {
+    $('button#f3-calculate').on('click', function () {
         var n1 = $('#f3-a').val()
         var n2 = $('#f3-b').val()
-        if (n1 < n2) {
-            var value3 = n2 - n1
-            var nResult = value3 / n1 * 100
+    	if (n1 < n2) {
+	        var value3 = n2 - n1
+	        var  nResult = value3 / n1 * 100
 
         } else {
-            var value3 = n2 - n1
-            var nResult = value3 / n2 * 100
+	        var value3 = n2 - n1
+	        var  nResult = value3 / n2 * 100
         }
         $('#f3-result').val(nResult)
 
         if (!isNaN(nResult)) {
-            $('#helpBlock1').text(done).addClass("text-success").removeClass("help-block").removeClass("text-danger");
-        } else {
-            $('#helpBlock1').text(wrong).addClass("text-danger").removeClass("text-success").removeClass("help-block");
-        }
+	        $('#helpBlock1').text(done).addClass("text-success").removeClass("help-block").removeClass("text-danger");
+	    } else {
+	        $('#helpBlock1').text(wrong).addClass("text-danger").removeClass("text-success").removeClass("help-block");
+	    }
     })
     </script>
 </body>
